@@ -1,0 +1,55 @@
+/* Full screen and center container */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #ffe4e1; /* soft pink */
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Container for card + side GIFs */
+.container {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* space between GIFs and card */
+  padding: 20px;
+}
+
+/* Side GIFs - plain, no box */
+.gif {
+  width: 120px;
+  height: 120px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Float animation for GIFs */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Center Card */
+.card {
+  background-color: #fff0f5; /* slightly lavender */
+  padding: 40px 50px;
+  border-radius: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  max-width: 500px;
+  min-height: 250px;
+  display: flex;
+  justify-content: center; /* vertical center */
+  align-items: center;     /* horizontal center */
+  text-align: center;
+}
+
+/* Text inside card */
+.card p {
+  margin: 0;
+  font-size: 18px;
+  color: #5e274a; /* medium violet-red */
+  font-family: 'Pacifico', cursive; /* playful font */
+  line-height: 1.6;
+}

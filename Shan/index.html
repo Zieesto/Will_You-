@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoneyBunch</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #d385c1;
+    }
+
+    .button-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      padding: 40px 60px;
+      background-color: #ffffff;
+      border-radius: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    .box-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 36px;
+      background: linear-gradient(90deg, #ff5f6d, #ffc371);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin: 0;
+      text-shadow: 2px 2px 5px rgba(255, 150, 150, 0.6);
+    }
+
+    #gif-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .valentine-gif {
+      width: 180px;
+      border-radius: 15px;
+      animation: floatGif 3s ease-in-out infinite;
+    }
+
+    @keyframes floatGif {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    #confirm-text {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      margin: 0;
+      text-align: center;
+      color: #000000;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      padding: 20px 25px 20px 22px;
+      box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px inset;
+      background-color: #e8e8e8;
+      border: 9px solid #ffe2e2;
+      border-radius: 35px;
+      font-size: 25px;
+      cursor: pointer;
+      font-weight: 900;
+      color: rgb(134, 124, 124);
+      font-family: monospace;
+      transition:
+        transform 400ms cubic-bezier(0.68, -0.55, 0.27, 2.5),
+        border-color 400ms ease-in-out,
+        background-color 400ms ease-in-out;
+      position: relative;
+    }
+
+    button:hover {
+      background-color: #eee;
+      transform: scale(1.05);
+    }
+
+    button svg { margin-right: 11px; fill: rgb(255, 110, 110); }
+
+    .ex-btn {
+      padding: 12px 16px 12px 14px;
+      font-size: 18px;
+      border-width: 6px;
+      border-color: #cac1c1;
+      color: #666;
+    }
+
+    .ex-btn svg { fill: #ff0000; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="button-box">
+      <h2 class="box-text">💖 Will you be my Valentine? 💖</h2>
+
+      <!-- GIF -->
+      <div id="gif-container">
+        <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWV5eHl1Ym5uMHVyaWRmcm43MGk5aWl5M3RmOG03bzdnNHl2cmZhYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/lOaMPfXXuaw5PRSDZv/giphy.gif" 
+             alt="Valentine GIF" 
+             class="valentine-gif">
+
+        <p id="confirm-text">Hey Shan!</p>
+      </div>
+
+      <div class="btn-group">
+        <!-- YES BUTTON -->
+        <button class="heart" id="yes-btn">
+          <svg class="empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+            <path fill="none" d="M0 0H24V24H0z"></path>
+            <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2z"></path>
+          </svg>
+          YES
+        </button>
+
+        <!-- NO BUTTON -->
+        <button class="ex-btn" id="no-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22">
+            <path d="M18.3 5.71 12 12l6.3 6.29-1.41 1.42L10.59 13.4 4.29 19.71 2.88 18.3 9.17 12 2.88 5.71 4.29 4.29 10.59 10.6l6.3-6.31z"/>
+          </svg>
+          NO
+        </button>
+      </div>
+    </div>
+  </div>
+
+<script>
+const noBtn = document.getElementById('no-btn');
+const yesBtn = document.getElementById('yes-btn');
+const box = document.querySelector('.button-box');
+const gif = document.querySelector('.valentine-gif');
+const confirmText = document.getElementById('confirm-text');
+const heading = document.querySelector('.box-text');
+
+let hoverCount = 0; // NO hover
+const maxSwaps = 100;
+
+let yesClickCount = 0; // YES click tracker
+
+// YES button behavior
+yesBtn.addEventListener('click', () => {
+  yesClickCount++;
+
+  if (yesClickCount === 1) {
+    heading.textContent = "YAY! 💖";
+    confirmText.textContent = "I love you so much bibi";
+    gif.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGd2b3lvd3ExaTNiMHNmZnoyMnVjd2Y0dzJtYjhtcGZwczN5Zzg4bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/hY8zxeuFn4tjRw0SXf/giphy.gif";
+  } else if (yesClickCount === 2) {
+    window.location.href = "message.html";
+  }
+});
+
+// NO button hover
+noBtn.addEventListener('mouseenter', () => {
+  hoverCount++;
+
+  if (hoverCount <= maxSwaps && noBtn.style.display !== "none") {
+    const boxRect = box.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
+    const maxX = boxRect.width - btnRect.width;
+    const maxY = boxRect.height - btnRect.height;
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+    noBtn.style.position = "absolute";
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+  }
+
+  // GIF sequence for NO hover
+  switch (hoverCount) {
+    case 2:
+      gif.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzN4Nmhhd3o4ZDRlaGp0cjk1YWxobzA3OXBudDFteDEzbzdtMHYzOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/d638q1nTBYixhQlt6o/giphy.gif";
+      confirmText.textContent = "Are you sure baby?";
+      break;
+    case 3:
+      confirmText.textContent = "Ohhh... wait...";
+      break;
+    case 4:
+      gif.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWdxcXQ3eWJ0azAwa2hyZDE5djU3bWU4bGVhdmtmNjc3cDJlNG84ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/RHP7x3h7700aeEwv5M/giphy.gif";
+      confirmText.textContent = "Please baby...";
+      break;
+    case 5:
+      gif.src = "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2VvdXY4ajV3b2YwdW1rczZ3N241NjN2ZGV6NWp2ZWl5ZDFmOTZ1biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/kBfcBerPosv5XHdYtQ/giphy.gif";
+      confirmText.textContent = "Don't do this to me :'( ";
+      break;
+    case 6:
+      gif.src = "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnA4d2M0dmg1ZXprZWcxbTh2MDB0Mjh1a3AyNmh1bDJjeHp1dXZvOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/W4RizlO6qZWQRYw9mb/giphy.gif";
+      confirmText.textContent = "Why?? huhuhu???";
+      break;
+    case 7:
+      gif.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW5ucm9wbjF5MWtqN2hqY20wd29nbTliYTVjdWpjanEydjRyNnU2MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/BhRNXjTlP0IdQp25cd/giphy.gif";
+      confirmText.textContent = "I'm waiting....";
+      break;
+    case 9:
+      gif.src = "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHo2a3NrbnR2MXh0MjYzY2poMnc5MWtmbGpudHJjb3o2NjBqc2lrYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/csXXADlLOZ9EPy9LQK/giphy.gif";
+      confirmText.textContent = "Sumusobra ka na ahh!!!";
+      break;
+    case 10:
+      gif.src = "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeXV2cHgwY3dpYzhzYmd0NHp1OHFndTE4amdlazQ2aGlqeW94dGVkNSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/qTvxY4EM06af8xRz4L/giphy.gif";
+      confirmText.textContent = "Pano bayan no choice ka na!!!";
+      noBtn.style.display = "none";
+      break;
+  }
+});
+
+// redirect on NO click
+noBtn.addEventListener('click', () => {
+  window.location.href = "no1.html";
+});
+</script>
+</body>
+</html>

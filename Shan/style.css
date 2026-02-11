@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #d385c1;
+}
+
+.button-box {
+  position: relative; /* needed for NO button absolute positioning */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 40px 60px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+.box-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 36px;
+  background: linear-gradient(90deg, #ff5f6d, #ffc371);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(255, 150, 150, 0.6);
+}
+
+#gif-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* horizontal center */
+  justify-content: center; /* vertical center */
+  text-align: center;
+}
+
+.valentine-gif {
+  width: 180px;
+  border-radius: 15px;
+  margin: 15px 0;
+  animation: floatGif 3s ease-in-out infinite;
+}
+
+@keyframes floatGif {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+#confirm-text {
+  font-family: 'Pacifico', cursive;
+  font-size: 28px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #000000;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  padding: 20px 25px 20px 22px;
+  box-shadow: rgba(10, 37, 64, 0.35) 0px -2px 6px inset;
+  background-color: #e8e8e8;
+  border: 9px solid #ffe2e2;
+  border-radius: 35px;
+  font-size: 25px;
+  cursor: pointer;
+  font-weight: 900;
+  color: rgb(134, 124, 124);
+  font-family: monospace;
+  transition: transform 400ms cubic-bezier(0.68, -0.55, 0.27, 2.5),
+              border-color 400ms ease-in-out,
+              background-color 400ms ease-in-out;
+  position: relative;
+}
+
+button:hover {
+  background-color: #eee;
+  transform: scale(1.05);
+  animation: movingBorders 3s infinite;
+}
+
+@keyframes movingBorders {
+  0% { border-color: #f18787; }
+  50% { border-color: #ffd8d8; }
+  90% { border-color: #fce4e4; }
+}
+
+button svg { margin-right: 11px; fill: rgb(255, 110, 110); }
+.filled { position: absolute; opacity: 0; top: 20px; left: 22px; }
+
+@keyframes beatingHeart {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.15); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}
+
+.heart:hover .filled { opacity: 1; animation: beatingHeart 1.2s infinite; }
+
+.ex-btn {
+  padding: 12px 16px 12px 14px;
+  font-size: 18px;
+  border-width: 6px;
+  border-color: #cac1c1;
+  color: #666;
+}
+
+.ex-btn svg { fill: #ff0000; margin-right: 8px; }
